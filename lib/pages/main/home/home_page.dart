@@ -56,15 +56,22 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          HomeHeader(),
-          Container(
-            color: Colors.black12,
-            height: 2,
-          ),
-          Expanded(child: _buildTabBarView()),
-        ],
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverList(
+                delegate: SliverChildListDelegate([
+              Container(
+                child: HomeHeader(),
+              ),
+              Container(
+                color: Colors.black12,
+                height: 2,
+              ),
+            ]))
+          ];
+        },
+        body: _buildTabBarView(),
       ),
     );
   }
@@ -80,26 +87,36 @@ class HomePage extends StatelessWidget {
           ),
           itemCount: 10,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Image.asset("assets/home1.jpg", height: 90),
-                SizedBox(height: 10),
-                Text(
-                  "안녕하세요 저희 서비스에 오셔서 감사합니다. 잘 부탁드립니다",
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Icon(CupertinoIcons.heart_fill, color: Colors.red),
-                    SizedBox(width: 10),
-                    Text(
-                      "4.5 | 25개의 평가",
-                      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                Text("50000원"),
-              ],
+            return Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Column(
+                children: [
+                  Image.asset("assets/home1.jpg", height: 90),
+                  SizedBox(height: 10),
+                  Text(
+                    "안녕하세요 저희 서비스에 오셔서 감사합니다. ",
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    children: [
+                      Icon(CupertinoIcons.heart_fill, color: Colors.red, size: 15),
+                      SizedBox(width: 10),
+                      Text(
+                        "4.5 | 25개의 평가",
+                        style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "50000원",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             );
           }),
     );

@@ -28,7 +28,7 @@ class HomeHeader extends StatelessWidget {
 
   Row _buildRow() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           children: [
